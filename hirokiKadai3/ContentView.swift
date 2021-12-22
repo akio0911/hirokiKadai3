@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var inputnum1: Int?
-    @State private var inputnum2: Int?
+    @State private var inputNum1: Int?
+    @State private var inputNum2: Int?
     @State private var symbol1: Bool = false
     @State private var symbol2: Bool = false
-    @State private var outputnum1: Int = 0
-    @State private var outputnum2: Int = 0
+    @State private var outputNum1: Int = 0
+    @State private var outputNum2: Int = 0
     @State private var total: Int = 0
     
     var body: some View {
         VStack {
             HStack {
-                NumberInputView(value: $inputnum1)
-                NumberInputView(value: $inputnum2)
+                NumberInputView(value: $inputNum1)
+                NumberInputView(value: $inputNum2)
             }
             
             HStack {
@@ -29,22 +29,22 @@ struct ContentView: View {
                 SymbolSwitchView(value: $symbol2)
             }
             
-            let unwrapedNum = [inputnum1, inputnum2].map{$0 ?? 0}
+            let unwrapedNum = [inputNum1, inputNum2].map{ $0 ?? 0 }
             Button(action: {
-                outputnum1 = symbol1 ? -1 * unwrapedNum[0] : unwrapedNum[0]
-                outputnum2 = symbol2 ? -1 * unwrapedNum[1] : unwrapedNum[1]
-                total = outputnum1 + outputnum2
+                outputNum1 = (symbol1 ? -1 : 1) * unwrapedNum[0]
+                outputNum2 = (symbol2 ? -1 : 1) * unwrapedNum[1]
+                total = outputNum1 + outputNum2
             }) {
                 Text("Button")
             }
             .padding()
             
             HStack {
-                Text(String(outputnum1))
+                Text(String(outputNum1))
                 Spacer().frame(width: 100)
                 Text("+")
                 Spacer().frame(width: 100)
-                Text(String(outputnum2))
+                Text(String(outputNum2))
             }
             
             Text(String(total))
